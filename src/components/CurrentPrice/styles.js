@@ -5,12 +5,13 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 'auto',
         alignItems: 'center',
+        paddingBottom: 5,
     },
     currentPrice:{
         color: "#f50d41",
         fontSize: 32,
         fontWeight: 'bold',
-        paddingTop: 20,
+        paddingTop: 5,
     },
     textPrice:{
         color: '#fff',
