@@ -10,6 +10,7 @@ export default function QuotationsList(props){
     return(
         <Fragment>
             <View style={styles.filters}>
+
                 <TouchableOpacity
                 style={styles.buttonQuery}
                 onPress={() => daysQuery(7)}
@@ -45,16 +46,15 @@ export default function QuotationsList(props){
                     <Text style={styles.textButtonQuery}>6M</Text>
                 </TouchableOpacity>
             </View>
-
-            <ScrollView>
-                <FlatList
-                    keyExtractor={item => item.data.toString()}
-                    data={props.listTransactions}
-                    renderItem={({item}) => {
-                        return <QuotationsItems valor={item.valor} data={item.data}/>
-                    }}
-                />
-            </ScrollView>
+            
+            <FlatList
+                keyExtractor={item => item.data.toString()}
+                data={props.listTransactions}
+                renderItem={({item}) => {
+                    return <QuotationsItems valor={item.valor} data={item.data}/>
+                }}
+            />
+            
 
         </Fragment>
     )

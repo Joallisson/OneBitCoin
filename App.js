@@ -4,7 +4,6 @@ import { StyleSheet, Text, StatusBar, SafeAreaView, Platform } from 'react-nativ
 import HistoryGraphic from './src/components/HistoryGraphic';
 import CurrentPrice from './src/components/CurrentPrice';
 import QuotationsList from './src/components/QuotationsList';
-import QuotationsItems from './src/components/QuotationsList/QuotationsItems';
 
 function addZero(number){
   if (number <= 9) {
@@ -16,13 +15,16 @@ function addZero(number){
 function url(qtdDays){
   const date = new Date();
   const listLastDays = qtdDays;
-  const end_date = `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDay())}`;
+  const end_date = `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`;
+  
   date.setDate(date.getDate() - listLastDays);
-  const start_date = `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDay())}`;
+
+  const start_date = `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDate())}`;
   return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${start_date}&end=${end_date}`;
 }
 
 async function getListCoins(url){
+  
   let response = await fetch(url)
   let returnApi = await response.json()
   let selectListQuotations = returnApi.bpi
@@ -59,7 +61,7 @@ export default function App() {
     setUpdateData(true)
   }
 
-  useEffect(() => {
+  useEffect(() => { //ATUALIZA A LISTA DE BITCOINS E O GRÁFICO SEMPRE QUE O USUÁRIO ESCOLHE UM FILTRO
 
     getListCoins(url(days)).then((data) => {
       setCoinList(data)
