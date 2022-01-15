@@ -14,19 +14,16 @@ function addZero(number){
 }
 
 function url(qtdDays){
-  const date = new Date()
-  const listLastDays = qtdDays
-  const end_date = `${date.getFullYear}-${addZero(date.getMonth() + 1)}-${addZero(date.getDay())}`;
-  
-  date.setDate(date.getDate() - listLastDays)
-
-  const start_date = `${date.getFullYear}-${addZero(date.getMonth() + 1)}-${addZero(date.getDay())}`;
-  
-  return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${start_date}&end=${end_date}`
+  const date = new Date();
+  const listLastDays = qtdDays;
+  const end_date = `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDay())}`;
+  date.setDate(date.getDate() - listLastDays);
+  const start_date = `${date.getFullYear()}-${addZero(date.getMonth() + 1)}-${addZero(date.getDay())}`;
+  return `https://api.coindesk.com/v1/bpi/historical/close.json?start=${start_date}&end=${end_date}`;
 }
 
 async function getListCoins(url){
-  let response = await fectch(url)
+  let response = await fetch(url)
   let returnApi = await response.json()
   let selectListQuotations = returnApi.bpi
   const queryCoinsList = Object.keys(selectListQuotations).map((key) => {
@@ -36,20 +33,19 @@ async function getListCoins(url){
     }
   });
   let data = queryCoinsList.reverse()
-  return data
+  return data 
 }
 
 async function getPriceCoinsGraphic(url){
-  let responseG = await fectch(url)
-  let returnApiG = await response.json()
+  let responseG = await fetch(url)
+  let returnApiG = await responseG.json()
   let selectListQuotationsG = returnApiG.bpi
   const queryCoinsList = Object.keys(selectListQuotationsG).map((key) => {
-      valor: selectListQuotationsG[key]
+      return selectListQuotationsG[key]
   });
   let dataG = queryCoinsList
-  return dataG
+  return dataG 
 }
-
 
 export default function App() {
   
@@ -79,6 +75,10 @@ export default function App() {
 
   }, [updateData])
 
+  useEffect(() => {
+    getListCoins(url(days))
+  }, [])
+
   return (
     <SafeAreaView style={styles.container}>
 
@@ -90,7 +90,6 @@ export default function App() {
       <CurrentPrice/>
       <HistoryGraphic/>
       <QuotationsList/>
-      <QuotationsItems/>
 
     </SafeAreaView>
   );
