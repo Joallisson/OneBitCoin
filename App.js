@@ -90,7 +90,7 @@ export default function App() {
       />
 
       <CurrentPrice/>
-      <HistoryGraphic/>
+      <HistoryGraphic infoDataGraphic={coinsGraphicList}/>
       <QuotationsList filterDay={updateDay} listTransactions={coinsList} />
 
     </SafeAreaView>
