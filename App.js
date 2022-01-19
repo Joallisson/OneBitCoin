@@ -55,10 +55,15 @@ export default function App() {
   const [coinsGraphicList, setCoinsGraphicList] = useState([0])
   const [days, setDays] = useState(30)
   const [updateData, setUpdateData] = useState(true)
+  const [price, setPrice] = useState()
 
   function updateDay(number){
     setDays(number)
     setUpdateData(true)
+  }
+
+  function priceCotation(){
+    setPrice(coinsGraphicList.pop())
   }
 
   useEffect(() => { //ATUALIZA A LISTA DE BITCOINS E O GRÁFICO SEMPRE QUE O USUÁRIO ESCOLHE UM FILTRO
@@ -89,7 +94,7 @@ export default function App() {
       barStyle = 'light-content'
       />
 
-      <CurrentPrice/>
+      <CurrentPrice lastCotation={price}/>
       <HistoryGraphic infoDataGraphic={coinsGraphicList}/>
       <QuotationsList filterDay={updateDay} listTransactions={coinsList} />
 
