@@ -75,6 +75,7 @@ export default function App() {
     getPriceCoinsGraphic(url(days)).then((dataG) => {
       setCoinsGraphicList(dataG)
     })
+    priceCotation()
 
     if(updateData){
       setUpdateData(false)
